@@ -1,0 +1,115 @@
+/* 全局样式 */
+* {
+    box-sizing: border-box; /* 确保布局计算一致 */
+    margin: 0;
+    padding: 0;
+}
+
+/* 页面主体样式 */
+body {
+    background-color: #111; /* 深灰色背景 */
+    color: #aaa; /* 浅灰色文字 */
+    font-family: Roboto Slab, serif; /* 设置字体 */
+}
+/*定义.layout 容器的布局*/
+body > .layout {
+    /*容器占满整个页面*/
+    width: 100%;
+    height: 100%;
+    display: grid;  /*使用CSS Grid布局*/
+    /*将容器分为两列，第一列占剩余空间（1fr），第二列的宽度由自定义属性 --bar-size 决定*/
+    grid-template-columns: 2fr var(--bar-size);
+    grid-template-rows: var(--bar-size) 2fr;
+    grid-gap: 10px; /*网格之间的间距为 10px*/
+    padding: 10px;  /*器的内边距为 10px*/
+}
+
+/*.layout1 的具体布局模式*/
+.layout1 {
+    /*定义自定义属性 --bar-size 的值为 300px，用于控制第二列的宽度和第二行的高度*/
+    --bar-size: 300px;
+    /*定义网格区域的名称和布局*/
+    grid-template-areas:
+        /*"header header"*/
+        "bars radar"
+        "bubbles controls";
+}
+
+/*
+        定义网格区域的名称和布局
+        header  | header
+        bars    | radar
+        bubbles | controls
+*/
+
+h1 {
+    /* SVG 元素放置在 CSS Grid 布局的特定区域*/
+    grid-area: header;
+    line-height: 30px;
+    text-align: center;
+    margin: 0;
+}
+
+svg {
+    background-color: #222;
+    width: 100%;
+    height: 100%;
+}
+
+svg.bubbles {
+    grid-area: bubbles;
+}
+
+svg.bars {
+    grid-area: bars;
+}
+
+svg.radar {
+    grid-area: radar;
+}
+
+svg .title {
+    fill: currentColor;
+    text-anchor: middle;
+    alignment-baseline: middle;
+}
+
+/*控制按钮区域的设置*/
+body > .layout > .controls {
+    font-size: 10pt;
+    grid-area: controls;
+}
+
+/*按钮和下拉菜单*/
+button, select {
+    border: none;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background-color: #222;
+    color: #aaa;
+    display: block;
+    margin-bottom: 5px;
+    margin-right: 0;
+    width: 100%;
+}
+
+button {
+    box-shadow: inset 2px 2px 2px rgb(255 255 255 / 20%);
+}
+
+button:hover {
+    background-color: #333;
+}
+
+/*解释栏的文字样式*/
+/*body > .layout > .controls > .explanation {*/
+/*    font-family: Roboto;*/
+/*}*/
+
+h2 {
+    grid-area: header;
+    line-height: 20px;
+    text-align: center;
+    font-size: 12pt;
+    margin: 0;
+}

@@ -30,14 +30,13 @@ body > .layout {
     --bar-size: 300px;
     /*定义网格区域的名称和布局*/
     grid-template-areas:
-        /*"header header"*/
         "bars radar"
         "bubbles controls";
 }
 
 /*
         定义网格区域的名称和布局
-        header  | header
+
         bars    | radar
         bubbles | controls
 */

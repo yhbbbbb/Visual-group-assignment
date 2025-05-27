@@ -1,7 +1,44 @@
 export default class DataLoading {
-    constructor() {
+    constructor(){
         this.dataSet = null
         this.promise = d3.csv("dataset.csv").then(d => this.dataSet = d)
+    }
+
+    async import_data(){
+        let data = new Map();
+        await d3.csv("dataset.csv", function (d) {
+            if (!data.has(d.code)) {
+                data.set(d.code, {
+                    name: d.efsaprodcode2_recoded,
+                    category1: d.level1,
+                    category2: d.level2,
+                    category3: d.level3,
+                    nutrients: new Map(),
+                });
+            }
+            if(!data.get(d.code).nutrients.has(d.COUNTRY)){
+                data.get(d.code).nutrients.set(d.COUNTRY, new Map())
+            }
+            data.get(d.code).nutrients.get(d.COUNTRY).set({ n_id: d.NUTRIENT_ID, n_name: d.NUTRIENT_TEXT}, parseFloat(d.LEVEL));
+        });
+        return [...data.values()];
+    }
+
+    async import_data_legacy(){
+        let data = new Map();
+        await d3.csv("dataset.csv", function (d) {
+            if (!data.has(d.code)) {
+                data.set(d.code, {
+                    name: d.efsaprodcode2_recoded,
+                    category1: d.level1,
+                    category2: d.level2,
+                    category3: d.level3,
+                    nutrients: new Map(),
+                });
+            }
+            data.get(d.code).nutrients.set({ n: d.NUTRIENT_ID, c: d.COUNTRY }, parseFloat(d.LEVEL));
+        });
+        return [...data.values()];
     }
 
     async Data_Hierarchy(){
@@ -82,11 +119,15 @@ export default class DataLoading {
     不区分大小写比较
     默认返回 false
      */
-    node_contains_category(node, category_name) {
-    return node.children?.some(child =>
-        child.name?.toLowerCase() === category_name?.toLowerCase()
-    ) ?? false;
-}
+    node_contains_category(node, category_name){
+        for (let i = 0; i < node.children.length; i++){
+            let category_in_node = node.children[i]
+            if (category_in_node.name == category_name){
+                return true
+            }
+        }
+        return false
+    }
     async import_barchart_data(cat1, cat2, cat3, cou){
 
         let axes = [
@@ -104,7 +145,7 @@ export default class DataLoading {
             { id: "14193", name: "E",                full_name: "Vitamin E; alpha-tocopherol equiv from E vitamer activities", unit: "Milligram/100 gram", rdi: 15 }, // https://ods.od.nih.gov/factsheets/VitaminE-Consumer/
             { id: "13727", name: "Alpha-tocopherol", full_name: "Alpha-tocopherol",                                            unit: "Milligram/100 gram", rdi: 15 }, // https://ods.od.nih.gov/factsheets/VitaminE-Consumer/
             { id: "14194", name: "KV",                full_name: "Vitamin K, total",                                           unit: "Microgram/100 gram", rdi: 105 }, // https://ods.od.nih.gov/factsheets/vitaminK-Consumer/
-            { id: "34",    name: "Zn",               full_name: "Zinc (Zn)",                                                    unit: "Milligram/100 gram", rdi: 10 }, // https://ods.od.nih.gov/factsheets/Zinc-Consumer/
+            { id: "34",    name: "Zn",               full_name: "Zinc (Zn)",                                                  unit: "Milligram/100 gram", rdi: 10 }, // https://ods.od.nih.gov/factsheets/Zinc-Consumer/
             { id: "18",    name: "Cu",               full_name: "Copper (Cu)",                                                 unit: "Milligram/100 gram", rdi: 900 } // https://ods.od.nih.gov/factsheets/Copper-Consumer/
         ];
 
@@ -159,7 +200,6 @@ export default class DataLoading {
                     nutrient_data.Finland = country[0]/country[1] ? country[0]/country[1] : 0
                 }
                 if(j==1){
-
                     nutrient_data.France = country[0]/country[1] ? country[0]/country[1] : 0
                 }
                 if(j==2){

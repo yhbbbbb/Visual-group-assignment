@@ -1,7 +1,7 @@
-import DataLoading from "./DataLoading";
-import Bar_Chart from "./Bar_Chart";
-import Selector_Chart from "./Selector_Chart";
-import Radar_Chart from "./Radar_Chart";
+import DataLoading from "./DataLoading.js";
+import Bar_Chart from "./Bar_Chart.js";
+import Selector_Chart from "./Selector_Chart.js";
+import Radar_Chart from "./Radar_Chart.js";
 
     let axes = [
         { id: "56",    name: "Ca",               full_name: "Calcium (Ca)",                                                unit: "Milligram/100 gram", rdi: 1200 }, // https://ods.od.nih.gov/factsheets/Calcium-Consumer/
@@ -10,16 +10,16 @@ import Radar_Chart from "./Radar_Chart";
         { id: "73",    name: "P",                full_name: "Phosphorus (P)",                                              unit: "Milligram/100 gram", rdi: 1000 }, // https://ods.od.nih.gov/factsheets/Phosphorus-Consumer/
         { id: "161",   name: "K",                full_name: "Potassium (K)",                                               unit: "Milligram/100 gram", rdi: 3000 }, // https://ods.od.nih.gov/factsheets/Potassium-Consumer/
         { id: "34",    name: "Zn",               full_name: "Zinc (Zn)",                                                   unit: "Milligram/100 gram", rdi: 10 }, // https://ods.od.nih.gov/factsheets/Zinc-Consumer/
-        { id: "43",    name: "Fe",                full_name: "Total iron",                                                  unit: "Milligram/100 gram", rdi: 15 }, // https://ods.od.nih.gov/factsheets/Iron-Consumer/
-        { id: "529",   name: "Se",               full_name: "Total Selenium",                                              unit: "Milligram/100 gram", rdi: 55 }, // https://ods.od.nih.gov/factsheets/Selenium-Consumer/
-        { id: "14176", name: "V-B1",               full_name: "Thiamin",                                                     unit: "Milligram/100 gram", rdi: 1.2 }, // https://ods.od.nih.gov/factsheets/Thiamin-Consumer/
-        { id: "14150", name: "V-B2",               full_name: "Riboflavin",                                                  unit: "Milligram/100 gram", rdi: 1.2 }, // https://ods.od.nih.gov/factsheets/Riboflavin-Consumer/
-        { id: "14112", name: "V-B3",               full_name: "Niacin equivalents, total",                                   unit: "Milligram/100 gram", rdi: 15 }, // https://ods.od.nih.gov/factsheets/Niacin-Consumer/
-        { id: "14190", name: "V-B6",               full_name: "Vitamin B-6, total",                                          unit: "Milligram/100 gram", rdi: 1.3 }, // https://ods.od.nih.gov/factsheets/VitaminB6-Consumer/
-        { id: "14189", name: "V-B12",              full_name: "Vitamin B-12",                                                unit: "Milligram/100 gram", rdi: 2.4 }, // https://ods.od.nih.gov/factsheets/VitaminB12-Consumer/
-        { id: "14193", name: "V-E",                full_name: "Vitamin E; alpha-tocopherol equiv from E vitamer activities", unit: "Milligram/100 gram", rdi: 15 }, // https://ods.od.nih.gov/factsheets/VitaminE-Consumer/
-        { id: "13727", name: "α-tocopherol",          full_name: "Alpha-tocopherol",                                            unit: "Milligram/100 gram", rdi: 15 }, // https://ods.od.nih.gov/factsheets/VitaminE-Consumer/
-        { id: "14194", name: "K",                full_name: "Vitamin K, total",                                            unit: "Milligram/100 gram", rdi: 105 }, // https://ods.od.nih.gov/factsheets/vitaminK-Consumer/
+        { id: "43",    name: "F",                full_name: "Total iron",                                                  unit: "Milligram/100 gram", rdi: 15 }, // https://ods.od.nih.gov/factsheets/Iron-Consumer/
+        { id: "529",   name: "Se",               full_name: "Total Selenium",                                              unit: "Microgram/100 gram", rdi: 55 }, // https://ods.od.nih.gov/factsheets/Selenium-Consumer/
+        { id: "14176", name: "B1",               full_name: "Thiamin",                                                     unit: "Milligram/100 gram", rdi: 1.2 }, // https://ods.od.nih.gov/factsheets/Thiamin-Consumer/
+        { id: "14150", name: "B2",               full_name: "Riboflavin",                                                  unit: "Milligram/100 gram", rdi: 1.2 }, // https://ods.od.nih.gov/factsheets/Riboflavin-Consumer/
+        { id: "14112", name: "B3",               full_name: "Niacin equivalents, total",                                   unit: "Milligram/100 gram", rdi: 15 }, // https://ods.od.nih.gov/factsheets/Niacin-Consumer/
+        { id: "14190", name: "B6",               full_name: "Vitamin B-6, total",                                          unit: "Milligram/100 gram", rdi: 1.3 }, // https://ods.od.nih.gov/factsheets/VitaminB6-Consumer/
+        { id: "14189", name: "B12",              full_name: "Vitamin B-12",                                                unit: "Microgram/100 gram", rdi: 2.4 }, // https://ods.od.nih.gov/factsheets/VitaminB12-Consumer/
+        { id: "14193", name: "E",                full_name: "Vitamin E; alpha-tocopherol equiv from E vitamer activities", unit: "Milligram/100 gram", rdi: 15 }, // https://ods.od.nih.gov/factsheets/VitaminE-Consumer/
+        { id: "13727", name: "Alpha-tocopherol", full_name: "Alpha-tocopherol",                                            unit: "Milligram/100 gram", rdi: 15 }, // https://ods.od.nih.gov/factsheets/VitaminE-Consumer/
+        { id: "14194", name: "K",                full_name: "Vitamin K, total",                                            unit: "Microgram/100 gram", rdi: 105 }, // https://ods.od.nih.gov/factsheets/vitaminK-Consumer/
     ];
 
     let barChart
@@ -36,12 +36,22 @@ import Radar_Chart from "./Radar_Chart";
     let radar = new Radar_Chart(d3.select("svg.radar"), axes);
 
     let selected_item_name
-    let country = null;
-    let category1 = null;
-    let category2 = null;
-    let category3 = null;
 
     //按层级深入
+    radar.on("navigate-out", () => {
+        if (category1 == null) return;
+
+        if (category2 == null) {
+            category1 = null;
+        } else if (category3 == null) {
+            category2 = null;
+        } else {
+            category3 = null;
+        }
+
+        update_selection();
+    });
+
     radar.on("navigate-in", (_, datum) => {
         if (category1 == null) {
             category1 = datum.category1;
@@ -54,22 +64,12 @@ import Radar_Chart from "./Radar_Chart";
         update_selection();
     });
 
-    //反向退出层级
-    radar.on("navigate-out", () => {
-        if (category1 == null)
-            return;
-        if (category2 == null) {
-            category1 = null;
-        } else if (category3 == null) {
-            category2 = null;
-        } else {
-            category3 = null;
-        }
-
-        update_selection();
-    });
-
     addEventListener("resize", () => radar.draw(500));
+
+    let country = null;
+    let category1 = null;
+    let category2 = null;
+    let category3 = null;
 
     let data = await load_data();
     radar.selection = select_data();
@@ -176,7 +176,7 @@ import Radar_Chart from "./Radar_Chart";
         let controls = d3.select("body > .layout > .controls");
 
         //控制面板实现
-        let country_options = ["所有国家"].concat([...new Set(
+        let country_options = ["All countries"].concat([...new Set(
                 data.filter(d =>
                     (category1 == null || d.category1 == category1) &&
                     (category2 == null || d.category2 == category2) &&
@@ -221,10 +221,10 @@ import Radar_Chart from "./Radar_Chart";
 
         //当上级分类变更时，自动清空下级选择
         country_control
-            .property("value", country ?? "所有国家")
+            .property("value", country ?? "All countries")
             .on("input", () => {
                 country = country_control.property("value");
-                if (country == "所有国家") country = null;
+                if (country == "All countries") country = null;
                 update_selection();
                 console.log(country)
                 console.log(selected_item_name)

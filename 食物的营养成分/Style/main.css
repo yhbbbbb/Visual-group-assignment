@@ -1,15 +1,14 @@
 /* 全局样式 */
 * {
     box-sizing: border-box; /* 确保布局计算一致 */
-    margin: 0;
-    padding: 0;
 }
 
 /* 页面主体样式 */
 body {
+    margin: 0px;
     background-color: #111; /* 深灰色背景 */
     color: #aaa; /* 浅灰色文字 */
-    font-family: Roboto Slab, serif; /* 设置字体 */
+    font-family: Roboto Slab; /* 设置字体 */
 }
 /*定义.layout 容器的布局*/
 body > .layout {
@@ -18,10 +17,10 @@ body > .layout {
     height: 100%;
     display: grid;  /*使用CSS Grid布局*/
     /*将容器分为两列，第一列占剩余空间（1fr），第二列的宽度由自定义属性 --bar-size 决定*/
-    grid-template-columns: 2fr var(--bar-size);
-    grid-template-rows: var(--bar-size) 2fr;
+    grid-template-columns: 1fr var(--bar-size);
+    grid-template-rows: var(--bar-size) 1fr;
     grid-gap: 10px; /*网格之间的间距为 10px*/
-    padding: 8px;  /*器的内边距为 10px*/
+    padding: 2px;  /*器的内边距为 10px*/
 }
 
 /*.layout1 的具体布局模式*/
@@ -30,8 +29,19 @@ body > .layout {
     --bar-size: 300px;
     /*定义网格区域的名称和布局*/
     grid-template-areas:
+
         "bars radar"
         "bubbles controls";
+}
+
+/*画面布局第二样式*/
+.layout2 {
+    --bar-size: 300px;
+
+    grid-template-areas:
+        /*"header header"*/
+        "bars bubbles"
+        "radar controls";
 }
 
 /*
@@ -101,6 +111,10 @@ button:hover {
     background-color: #333;
 }
 
+button:active {
+    background-color: #444;
+    box-shadow: inset -2px -2px 2px rgb(255 255 255 / 20%);
+}
 /*解释栏的文字样式*/
 /*body > .layout > .controls > .explanation {*/
 /*    font-family: Roboto;*/

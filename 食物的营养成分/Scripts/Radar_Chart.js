@@ -35,7 +35,7 @@ export default class Radar_Chart extends EventListener {
             .range([0, Math.PI * 2]);
     }
 
-    draw(time) {
+    draw(time){
         let size = this.#svg.node().getBoundingClientRect();
 
         this.#radius = Math.min(size.width, size.height) / 2;

@@ -8,7 +8,7 @@ cou
 selected_item
 
      constructor(svg, cat1, cat2, cat3, cou, selected_item, dataReader) {
-        super();
+        super()
         this.cat1 = cat1;  // 一级分类
         this.cat2 = cat2;  // 二级分类
         this.cat3 = cat3;  // 三级分类
@@ -33,8 +33,8 @@ selected_item
 
         // X轴比例尺（分组+子分组）
         var xScale0 = d3.scaleBand().range([0, width*0.98]).padding(0.8); // 营养素分组
-        var xScale1 = d3.scaleBand(); // 国家子分组
-        //// Y轴比例尺（每种营养素独立）
+        var xScale1 = d3.scaleBand() // 国家子分组
+        // Y轴比例尺（每种营养素独立）
         var yScale = d3.scaleLinear().range([ 0,height - 60])
         var yScaleCu = d3.scaleLinear().range([ 0,height - 60])
         var yScaleMg = d3.scaleLinear().range([ 0,height - 60])
@@ -88,12 +88,10 @@ selected_item
         yAxisB6.id = "B6"
         yAxisB12.id = "B12"
         yAxisE.id = "E"
-        yAxisAt.id = "α-tocopherol"
+        yAxisAt.id = "Alpha-tocopherol"
         yAxisKV.id = "KV"
 
         let axises = [yAxis, yAxisF, yAxisMg, yAxisB3, yAxisP, yAxisK, yAxisB2, yAxisSe, yAxisB1, yAxisB6, yAxisB12, yAxisE, yAxisAt, yAxisKV, yAxisZn, yAxisCu]
-
-        //yScale.domain([max, 0])
 
         yScale.id = "Ca"
         yScaleCu.id = "Cu"
@@ -109,7 +107,7 @@ selected_item
         yScaleB6.id = "B6"
         yScaleB12.id = "B12"
         yScaleE.id = "E"
-        yScaleAt.id = "α-tocopherol"
+        yScaleAt.id = "Alpha-tocopherol"
         yScaleKV.id = "KV"
 
         let scales = [yScale, yScaleF, yScaleMg, yScaleB3, yScaleP, yScaleK,

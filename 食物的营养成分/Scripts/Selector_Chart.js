@@ -1,7 +1,5 @@
-import EventListener from "./EventListener";
-import Send_Selected from "./main.js"
-
-
+import EventListener from "./EventListener.js";
+import Send_Selected from "./main.js";
 
 export default class Selector_Chart  extends EventListener {
     #svg;
@@ -52,15 +50,37 @@ export default class Selector_Chart  extends EventListener {
                 .style("cursor", "pointer")
                 .on("click", (event) => this.zoom(event, root))
 
-            this.node = this.#svg.append("g")
+           this.node = this.#svg.append("g")
                 .selectAll("circle")
                 .data(root.descendants().slice(1))
                 .join("circle")
-                    .attr("fill", d => d.children ? color(d.depth) : (this.food_selected.has(d.data.name) ? "black" : "white"))
-                    .on("mouseover", function() {(event, d) => document.getElementById("selection_data_text").innerHTML = "Hoevering over " +d.name; d3.select(this).attr("stroke", "#000");})
-                    .on("mouseout", function() { d3.select(this).attr("stroke", null); })
-                    .on("click", (event, d) => (focus !== d) && (this.zoom(event, d), event.stopPropagation()));
+                .attr("fill", d => d.children ? color(d.depth) :
+                      (this.food_selected.has(d.data.name) ? "black" : "white"))
+                // 鼠标悬停效果（带过渡动画）
+                .on("mouseover", function(event, d) {
+                  d3.select(this)
+                    .transition()
+                    .duration(300) // 动画时长300ms
+                    .ease(d3.easeCubicOut) // 缓动函数
+                    .attr("fill", "#ffcccc") // 淡红色
+                    .attr("stroke", "#000")
+                    .attr("stroke-width", 1.5);
 
+                })
+                // 鼠标移出效果（带过渡动画）
+                .on("mouseout", (event, d) => { // 使用箭头函数保持this上下文
+                  d3.select(event.currentTarget)
+                    .transition()
+                    .duration(200)
+                    .ease(d3.easeCubicOut)
+                    .attr("fill", d.children
+                      ? color(d.depth)
+                      : (this.food_selected.has(d.data.name) ? "black" : "white"))
+                    .attr("stroke", null);
+                })
+                .on("click", (event, d) =>
+                  (focus !== d) && (this.zoom(event, d), event.stopPropagation())
+                );
             this.label = this.#svg.append("g")
                     .style("font", "10px sans-serif")
                     .attr("pointer-events", "none")

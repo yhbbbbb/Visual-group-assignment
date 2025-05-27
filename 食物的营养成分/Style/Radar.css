@@ -1,0 +1,44 @@
+.radar .line {
+    cursor: pointer;
+    transition: opacity 0.3s ease; /* 添加过渡效果 */
+}
+
+.radar .line path {
+    fill: none;
+    stroke-width: 2;
+    stroke-opacity: 1;
+}
+
+.radar .line .circles circle {
+    r: 3;
+    fill-opacity: 1;
+    stroke: none;
+}
+
+.radar .axes text.label {
+    fill: white;
+}
+
+.radar circle.reference {
+    stroke: white;
+    fill: none;
+}
+
+.radar .axes .axis {
+    color: #999;
+}
+
+/* 默认情况下，所有数据线完全不透明 */
+.radar .line {
+    opacity: 1;
+}
+
+/* 当鼠标悬停在雷达图容器上时，所有数据线透明度降低 */
+.radar:hover .line {
+    opacity: 0.2;
+}
+
+/* 当鼠标悬停在某条数据线上时，该数据线保持完全不透明 */
+.radar .line:hover {
+    opacity: 1;
+}

@@ -11,7 +11,7 @@
 ## 数据集
 **URL:** https://www.efsa.europa.eu/en/data-report/food-composition-data
 ### 介绍
-这个仪表板显示了在7个不同国家测量的约400种产品的16种不同营养素的营养成分
+仪表板显示了在7个不同国家测量的约400种产品的16种不同营养素的营养成分
 
 ## 文件目录说明
 
@@ -23,6 +23,11 @@ filetree
 │  ├── index.html
 │  ├── Scripts
 │  │  ├── EventListener.js
+│  │  ├── DataLoading.js
+│  │  ├── Bar_Chart.js
+│  │  ├── Radar_Chart.js
+│  │  ├── Selector_Chart.js
+│  │  ├── d3.v7.min.js
 │  │  └── main.js
 │  ├── Style
 │  │  ├── main.css
@@ -30,9 +35,9 @@ filetree
 └── .gitignore
 ```
 ## 使用到的技术
-HTML、CSS、javascript
+`HTML`、`CSS`、`javascript`
 ### 库
 D3.js
 
 ## 版本控制
-该项目使用Git进行版本管理。您可以在repository参看当前可用版本
+该项目使用Git进行版本管理。可以在repository参看当前可用版本

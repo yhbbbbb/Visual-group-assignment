@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab">
     <link rel="stylesheet" href="Style/main.css" />
+    <link rel="stylesheet" href="Style/Radar.css" />
 </head>
 <body>
 
@@ -21,7 +22,7 @@
 <!--                    定义一个分组，用于绘制雷达图的坐标轴-->
                     <g class="axes">
 <!--                        分组中添加一个圆形元素，作为参考线-->
-                        <circle class="reference"></circle>
+                        <circle class="reference" r=""></circle>
                     </g>
                 </g>
         </svg>
@@ -31,10 +32,12 @@
         <svg class="bars"></svg>
 
         <div class="controls">
-            <select class="country"></select>
-            <select class="category1"></select>
-            <select class="category2"></select>
-            <select class="category3"></select>
+            <label>
+                <select class="country"></select>
+                <select class="category1"></select>
+                <select class="category2"></select>
+                <select class="category3"></select>
+            </label>
             <div class="buttons">
                 <button class="layout1">显示气泡图</button>
                 <button class="layout2">显示雷达图</button>
@@ -58,10 +61,11 @@
             <p class="explanation">
                 4.条形图显示了七个国家的营养含量。会根据所选的类别、国家和或食物项目进行更新。
                 x轴上的每种营养物质都有自己的图表，有单独的比例，使条形图可见，无论营养物质的价值有多大变化。
-
             </p>
         </div>
     </div>
+    <script src="Scripts/d3.v7.min.js"></script>
+    <script src="Scripts/main.js" type="module"></script>
 <!-- 插入雷达图渐变   <script src="script.js"></script>-->
 </body>
 </html>

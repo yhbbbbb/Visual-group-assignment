@@ -19,7 +19,7 @@ body > .layout {
     /*将容器分为两列，第一列占剩余空间（1fr），第二列的宽度由自定义属性 --bar-size 决定*/
     grid-template-columns: 1fr var(--bar-size);
     grid-template-rows: var(--bar-size) 1fr;
-    grid-gap: 10px; /*网格之间的间距为 10px*/
+    grid-gap: 8px; /*网格之间的间距为 10px*/
     padding: 2px;  /*器的内边距为 10px*/
 }
 
@@ -116,13 +116,14 @@ button:active {
     box-shadow: inset -2px -2px 2px rgb(255 255 255 / 20%);
 }
 /*解释栏的文字样式*/
-/*body > .layout > .controls > .explanation {*/
-/*    font-family: Roboto;*/
-/*}*/
+body > .layout > .controls > .explanation {
+    font-size: 10pt;
+    margin: 0;
+}
 
 h2 {
-    grid-area: header;
-    line-height: 20px;
+    grid-area: controls;
+    line-height: 17px;
     text-align: center;
     font-size: 12pt;
     margin: 0;

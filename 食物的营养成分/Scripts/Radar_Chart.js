@@ -56,8 +56,6 @@ export default class Radar_Chart extends EventListener {
 
         this.create_axes(rdi_scale, time);
 
-        // Process the data
-
         this.#line_groups.transition()
             .duration(time)
             .attr("stroke", (_, i) => d3.interpolateRainbow(i / this.#selection.length))

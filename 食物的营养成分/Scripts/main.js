@@ -176,7 +176,7 @@ import Radar_Chart from "./Radar_Chart.js";
         let controls = d3.select("body > .layout > .controls");
 
         //控制面板实现
-        let country_options = ["All countries"].concat([...new Set(
+        let country_options = ["所有国家"].concat([...new Set(
                 data.filter(d =>
                     (category1 == null || d.category1 == category1) &&
                     (category2 == null || d.category2 == category2) &&
@@ -186,20 +186,20 @@ import Radar_Chart from "./Radar_Chart.js";
                 )
             )].sort());
 
-        let category1_options = ["All categories"].concat([...new Set(
+        let category1_options = ["所有分类"].concat([...new Set(
                 data.filter(d =>
                     country == null || ([...d.nutrients.keys()].filter(k => k.c == country).length > 0)
                 ).map(d => d.category1)
             )].sort());
 
-        let category2_options = ["All categories"].concat([...new Set(
+        let category2_options = ["所有子分类"].concat([...new Set(
                 data.filter(d =>
                     (country == null || ([...d.nutrients.keys()].filter(k => k.c == country).length > 0)) &&
                     d.category1 == category1
                 ).map(d => d.category2)
             )].sort());
 
-        let category3_options = ["All categories"].concat([...new Set(
+        let category3_options = ["所有细分类"].concat([...new Set(
                 data.filter(d =>
                     (country == null || ([...d.nutrients.keys()].filter(k => k.c == country).length > 0)) &&
                     d.category1 == category1 &&
@@ -221,7 +221,7 @@ import Radar_Chart from "./Radar_Chart.js";
 
         //当上级分类变更时，自动清空下级选择
         country_control
-            .property("value", country ?? "All countries")
+            .property("value", country ?? "所有国家")
             .on("input", () => {
                 country = country_control.property("value");
                 if (country == "All countries") country = null;
@@ -237,10 +237,10 @@ import Radar_Chart from "./Radar_Chart.js";
             .text(d => d);
 
         category1_control
-            .property("value", category1 ?? "All categories")
+            .property("value", category1 ?? "所有分类")
             .on("input", () => {
                 category1 = category1_control.property("value");
-                if (category1 == "All categories")
+                if (category1 == "所有分类")
                 category1 = null;
                 category2 = null;
                 category3 = null;
@@ -255,10 +255,10 @@ import Radar_Chart from "./Radar_Chart.js";
             .text(d => d);
 
         category2_control
-            .property("value", category2 ?? "All categories")
+            .property("value", category2 ?? "所有子分类")
             .on("input", () => {
                 category2 = category2_control.property("value");
-                if (category2 == "All categories") category2 = null;
+                if (category2 == "所有子分类") category2 = null;
                 category3 = null;
                 update_selection();
                 selectorChart.zoomByCat(category1,category2,category3)
@@ -271,10 +271,10 @@ import Radar_Chart from "./Radar_Chart.js";
             .text(d => d);
 
         category3_control
-            .property("value", category3 ?? "All categories")
+            .property("value", category3 ?? "所有细分类")
             .on("input", () => {
                 category3 = category3_control.property("value");
-                if (category3 == "All categories") category3 = null;
+                if (category3 == "所有细分类") category3 = null;
                 update_selection();
                 selectorChart.zoomByCat(category1,category2,category3)
                 Send_Selected(category1, category2, category3, null, null)
@@ -307,7 +307,7 @@ import Radar_Chart from "./Radar_Chart.js";
         update_selection()
 
         d3.selectAll("svg.bars > *").remove();
-        // document.getElementById("selection_data_text").innerHTML = text;
+
         barChart =  new Bar_Chart(d3.select("svg.bars"), category1, category2, category3, country, selected_item_name, data_loading)
 
     }
